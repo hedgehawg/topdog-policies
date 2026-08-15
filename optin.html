@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMS Alert Opt-In — Top Dog Studios LLC</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 680px; margin: 3rem auto; padding: 0 1.25rem; color: #1a1a1a; line-height: 1.55; }
+  h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+  .updated { color: #666; font-size: .9rem; margin-bottom: 2rem; }
+  label { display: block; margin-top: 1.1rem; font-weight: bold; }
+  input[type="text"], input[type="tel"] { width: 100%; box-sizing: border-box; padding: .5rem; font-size: 1rem; font-family: inherit; margin-top: .3rem; border: 1px solid #999; border-radius: 3px; }
+  .consent { display: flex; gap: .6rem; align-items: flex-start; margin-top: 1.4rem; padding: 1rem; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; }
+  .consent input[type="checkbox"] { margin-top: .3rem; flex-shrink: 0; }
+  .consent p { margin: 0; font-size: .95rem; }
+  .optional { font-weight: normal; color: #666; font-style: italic; }
+  button { margin-top: 1.4rem; padding: .6rem 1.6rem; font-size: 1rem; font-family: inherit; background: #1a1a1a; color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+  #confirmation { display: none; margin-top: 1.4rem; padding: 1rem; border: 1px solid #2e7d32; border-radius: 4px; background: #f1f8e9; }
+</style>
+</head>
+<body>
+<h1>SMS Alert Opt-In</h1>
+<p class="updated">Top Dog Studios LLC</p>
+
+<p>Top Dog Studios LLC offers its principals and employees optional SMS alerts — automated
+operational notifications from the company's own trading and monitoring software (system
+status, process health, and settlement or reconciliation notices). Enrollment is entirely
+voluntary. To enroll, complete the form below.</p>
+
+<form id="optin-form">
+  <label for="name">Full name</label>
+  <input type="text" id="name" name="name" autocomplete="name">
+
+  <label for="phone">Mobile phone number</label>
+  <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+1 (___) ___-____">
+
+  <div class="consent">
+    <input type="checkbox" id="consent" name="consent">
+    <p><label for="consent" style="display:inline; margin:0;">I agree to receive recurring
+    automated operational alert text messages from Top Dog Studios LLC.</label>
+    <span class="optional">(Optional — checking this box is not required to submit this form.)</span>
+    Consent is not a condition of employment, system access, purchase, or any transaction.
+    Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to
+    opt out, <strong>HELP</strong> for help.
+    Terms: <a href="terms.html">https://hedgehawg.github.io/topdog-policies/terms.html</a> ·
+    Privacy: <a href="privacy.html">https://hedgehawg.github.io/topdog-policies/privacy.html</a></p>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<div id="confirmation">
+  <p id="confirmation-text"></p>
+</div>
+
+<script>
+document.getElementById('optin-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var consented = document.getElementById('consent').checked;
+  var box = document.getElementById('confirmation');
+  var text = document.getElementById('confirmation-text');
+  if (consented) {
+    text.innerHTML = 'Thank you — your opt-in has been recorded. You will receive automated ' +
+      'operational alert texts from Top Dog Studios LLC at the number provided. ' +
+      'Reply <strong>STOP</strong> at any time to opt out, or <strong>HELP</strong> for help.';
+  } else {
+    text.innerHTML = 'Your form was submitted without SMS consent — you will not receive text ' +
+      'messages. You retain full access to all company systems and services.';
+  }
+  box.style.display = 'block';
+  this.querySelector('button').disabled = true;
+  box.scrollIntoView({ behavior: 'smooth' });
+});
+</script>
+
+<p style="margin-top:2rem; font-size:.9rem; color:#666;">A record of each opt-in is retained by
+Top Dog Studios LLC. Questions: <a href="mailto:scott@palladiumtrain.com">scott@palladiumtrain.com</a>.</p>
+</body>
+</html>
